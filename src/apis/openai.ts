@@ -9,15 +9,15 @@ export default async function sendRequest(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + openaiApiKey,
+      Authorization: `Bearer ${process.env.VITE_OPENAI_API_KEY}`,
     },
     body: JSON.stringify({
-      model: openaiModel || 'gpt-3.5-turbo',
+      model: 'gpt-3.5-turbo', // Specify which transformer model we're gonna use
       messages: messages,
     }),
   };
 
-  const openaiHostAddress = openaiHost || 'api.openai.com';
+  const openaiHostAddress = `${process.env.VITE_OPENAI_HOST}`;
 
   fetch('https://' + openaiHostAddress + '/v1/chat/completions', requestOptions)
     .then(response => response.json())
