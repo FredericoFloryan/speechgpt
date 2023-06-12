@@ -2,7 +2,7 @@ import BlubIcon from './Icons/BlubIcon';
 import RightTriangleIcon from './Icons/RightTriangleIcon';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Card from './mycom/card';
+import Card from './Scenario/card';
 
 function Tips() {
   const { i18n } = useTranslation();

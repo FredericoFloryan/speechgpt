@@ -23,10 +23,10 @@ import { isMobile } from 'react-device-detect';
 import SpeechGPTIcon from './Icons/SpeechGPTIcon';
 import LanguageSelector from './LocaleSelector';
 import Button from './base/Button';
-import useSenarioStore from './mycom/senarioModel';
+import useSenarioStore from './Scenario/senarioModel';
 import create from 'zustand';
 import { use } from 'i18next';
-import useContentStore from './mycom/messageModel';
+import useContentStore from './Scenario/messageModel';
 
 type baseStatus = 'idle' | 'waiting' | 'speaking' | 'recording' | 'connecting';
 
