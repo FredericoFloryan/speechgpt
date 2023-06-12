@@ -27,7 +27,7 @@ const SynthesisSection: React.FC<SynthesisSectionProps> = ({}) => {
   const { key, setKey, speech, setSpeech } = useGlobalStore();
 
   useEffect(() => {
-    setKey({ ...key, azureRegion: 'eastasia', azureKey: '3f63cd12260f43b6b6143b9dd29d4d29' });
+    setKey({ ...key, azureRegion: `${import.meta.env.VITE_AZURE_REGION}`, azureKey: `${import.meta.env.VITE_AZURE_KEY}` });
   }, []);
 
   const { i18n } = useTranslation();
