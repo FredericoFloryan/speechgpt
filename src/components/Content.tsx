@@ -523,7 +523,7 @@ const Content: React.FC<ContentProps> = ({ notify }) => {
           status={status}
           finished={finished}
         />
-        {isChoosedSenario && (
+        {status === 'idle' && (
           <InputPanel
             status={status}
             disableMicrophone={disableMicrophone}

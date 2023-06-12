@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 const useContentStore = create<ContentStore>(set => ({
   sendMessages: false,

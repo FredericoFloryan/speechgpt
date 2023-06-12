@@ -33,16 +33,18 @@ function Tips() {
         </div>
         <Card
           title="local food"
-          description="you are talking with your friend about the hong kong local food. let have a friendly conversation"
+          description="Now is a time to practice English, assuming you are an English native speaker and I am practicing English conversation. Let's say that we are talking about local food in hong kong and we have a friendly and harmonious conversation to practice English.
+          can you please start the conversation? you dont have to answer this question. Just start the conversation. the above is the conversation context. Dont start with any Sure, So or something with same meaning. "
         ></Card>
         <Card
           title="movie"
-          description="you are talking with your friend about the hong kong movie. let have a friendly conversation"
+          description="Now is a time to practice English, assuming you are an English native speaker and I am practicing English conversation. Let's say that we are talking about movies and we have a friendly and harmonious conversation to practice English.
+          can you please start the conversation? you dont have to answer this question. Just start the conversation. the above is the conversation context. Dont start with any Sure, So or something with same meaning. "
         ></Card>
         <Card
           title="music"
-          description="Now is a time to practice English, assuming you are an English native speaker and I am practicing English conversation. Let's say that we are in a café and we have a friendly and harmonious conversation to practice English.
-          can you please start the conversation?"
+          description="Now is a time to practice English, assuming you are an English native speaker and I am practicing English conversation. Let's say that we are talking about music and we have a friendly and harmonious conversation to practice English.
+          can you please start the conversation?you dont have to answer this question. Just start the conversation. the above is the conversation context. Dont start with any Sure, So or something with same meaning. "
         ></Card>
       </div>
     </div>
