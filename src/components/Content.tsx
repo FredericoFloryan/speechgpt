@@ -22,6 +22,11 @@ import { existEnvironmentVariable, getEnvironmentVariable } from '../helpers/uti
 import { isMobile } from 'react-device-detect';
 import SpeechGPTIcon from './Icons/SpeechGPTIcon';
 import LanguageSelector from './LocaleSelector';
+import Button from './base/Button';
+import useSenarioStore from './Scenario/senarioModel';
+import create from 'zustand';
+import { use } from 'i18next';
+import useContentStore from './Scenario/messageModel';
 
 type baseStatus = 'idle' | 'waiting' | 'speaking' | 'recording' | 'connecting';
 
@@ -38,6 +43,8 @@ const useIsMount = () => {
 };
 
 const Content: React.FC<ContentProps> = ({ notify }) => {
+  const { isChoosedSenario, ChooseSenario, RemoveSenario } = useSenarioStore();
+
   const {
     key,
     chat,
@@ -51,7 +58,7 @@ const Content: React.FC<ContentProps> = ({ notify }) => {
   const { currentSessionId, sessions, addSession, setCurrentSessionId, setMessageCount } =
     useSessionStore();
 
-  const [sendMessages, setSendMessages] = useState<boolean>(false);
+  const { sendMessages, setSendMessages } = useContentStore();
 
   const chatList = useLiveQuery(() => chatDB.chat.toArray(), []);
 
@@ -327,6 +334,7 @@ const Content: React.FC<ContentProps> = ({ notify }) => {
     setStatus('idle');
     stopSpeechSynthesis();
     notify.resetNotify();
+    RemoveSenario();
   };
 
   function focusInput() {
@@ -515,19 +523,21 @@ const Content: React.FC<ContentProps> = ({ notify }) => {
           status={status}
           finished={finished}
         />
-        <InputPanel
-          status={status}
-          disableMicrophone={disableMicrophone}
-          userInput={input}
-          setUserInput={setInput}
-          startRecording={startRecording}
-          stopRecording={stopRecording}
-          handleSend={handleSend}
-          inputRef={inputRef}
-          handleInputKeyDown={handleInputKeyDown}
-          waiting={waiting}
-          notify={notify}
-        />
+        {status === 'idle' && (
+          <InputPanel
+            status={status}
+            disableMicrophone={disableMicrophone}
+            userInput={input}
+            setUserInput={setInput}
+            startRecording={startRecording}
+            stopRecording={stopRecording}
+            handleSend={handleSend}
+            inputRef={inputRef}
+            handleInputKeyDown={handleInputKeyDown}
+            waiting={waiting}
+            notify={notify}
+          />
+        )}
       </div>
     </div>
   );
