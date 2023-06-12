@@ -57,7 +57,7 @@ function ButtonGroup({
 
       resetTimeoutRef.current = setTimeout(() => {
         setIsConfirmingReset(false);
-      }, 6000);
+      }, 6000) as unknown as number;
     } else {
       clearConversation();
       setIsConfirmingReset(false);
