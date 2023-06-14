@@ -523,7 +523,6 @@ const Content: React.FC<ContentProps> = ({ notify }) => {
           status={status}
           finished={finished}
         />
-        {status === 'idle' && (
           <InputPanel
             status={status}
             disableMicrophone={disableMicrophone}
@@ -537,7 +536,6 @@ const Content: React.FC<ContentProps> = ({ notify }) => {
             waiting={waiting}
             notify={notify}
           />
-        )}
       </div>
     </div>
   );
