@@ -8,11 +8,9 @@ import useContentStore from './messageModel';
 interface CardProps {
   title: string;
   description: string;
-  imageSrc: string;
-  onClick: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ title, description, onClick }) => {
+const Card: React.FC<CardProps> = ({ title, description }) => {
   const { isChoosedSenario, ChooseSenario, RemoveSenario } = useSenarioStore();
   const { sendMessages, setSendMessages } = useContentStore();
 
