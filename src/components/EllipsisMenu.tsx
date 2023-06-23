@@ -4,6 +4,12 @@ import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { IconInfoCircle, IconMessage2, IconSettings } from '@tabler/icons-react';
 import { useTranslation } from 'react-i18next';
 
+import { getAuth, signOut } from "firebase/auth";
+import { auth } from '../../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+
+import { useNavigate } from 'react-router-dom';
+
 interface EllipsisMenuProps {
   setOpenSetting: (open: boolean) => void;
   setOpenAbout: (open: boolean) => void;
@@ -19,11 +25,21 @@ function EllipsisMenu({ setOpenSetting, setOpenAbout }: EllipsisMenuProps) {
   function handleAbout() {
     setOpenAbout(true);
   }
+  const navigate = useNavigate();
+  function handleLogOut(){
+    signOut(auth).then(() => {
+      console.log('Sign-out successful.')
+      navigate("/")
+    }).catch((error) => {
+      console.log("Sign-out Unsuccessful")
+});
+  }
 
   const buttons = [
     { name: i18n.t('common.setting'), icon: IconSettings, onClick: () => setOpenSetting(true) },
     { name: i18n.t('common.feedback'), icon: IconMessage2, onClick: handleFeedback },
     { name: i18n.t('common.about'), icon: IconInfoCircle, onClick: handleAbout },
+    { name: i18n.t('Log out'), icon: IconInfoCircle, onClick: handleLogOut },
   ];
 
   return (

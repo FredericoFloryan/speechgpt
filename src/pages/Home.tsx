@@ -14,6 +14,12 @@ import { IconMenu2 } from '@tabler/icons-react';
 import AboutDialog from '../components/AboutDialog';
 import Sidebar from '../components/Conversations/Sidebar';
 
+import { doc, setDoc, getDoc } from "firebase/firestore"; 
+import { db } from '../../firebase';
+import { auth } from '../../firebase';
+
+
+
 function Home() {
   const { i18n } = useTranslation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -24,6 +30,8 @@ function Home() {
   const [openSetting, setOpenSetting] = useState<boolean>(false);
   const [openAbout, setOpenAbout] = useState<boolean>(false);
 
+
+ 
   const notifyDict = {
     clearedNotify: Notify.clearedNotify,
     copiedNotify: Notify.copiedNotify,
@@ -76,8 +84,65 @@ function Home() {
     }
   }, [sessions.length]);
 
+  const user = auth.currentUser;
+  // const [signedIn, toggleSignIn ] = useState(false);
+
+
+  async function fetchUserInfo() {
+    if (user) {
+      const uid = user.uid
+      const displayName = user.displayName;
+      const email = user.email;
+      const photoURL = user.photoURL;
+      const emailVerified = user.emailVerified;
+      
+
+      const userAnalytics = {
+        stats: {
+          grammar: 0,
+          pronounciation: 0,
+          fluency: 0,
+          Intonation: 0,
+          general_context: 0,
+        },
+        answered: 0,
+      };
+
+      const accountInfo = {
+        email: email,
+        displayName: displayName,
+        photoURL : photoURL,
+        emailVerified: emailVerified,
+      };
+
+      try {
+        const usersRef = doc(db, "accountInfo", uid);
+        const docSnap = await getDoc(usersRef);
+    
+        if (!docSnap.exists()) {
+          setDoc(doc(db, "accountInfo", uid), accountInfo);
+          setDoc(doc(db, "userAnalytics", uid), userAnalytics);
+          console.log("Created new user", docSnap.data());
+        }
+        else {
+          console.log("User exists!")
+        }
+
+
+      } catch (error) {
+        console.error("Error fetching document:", error);
+      }
+    }
+
+    }
+    useEffect(() => {
+      console.log("Triggered")
+      fetchUserInfo();  
+    }, [])
+
   return (
     <div className="bg-slate-100 flex h-full relative">
+      
       <Toaster />
       <SettingDialog open={openSetting} onClose={() => setOpenSetting(false)} />
       <AboutDialog open={openAbout} onClose={() => setOpenAbout(false)} notify={notifyDict} />
@@ -106,6 +171,7 @@ function Home() {
       </div>
       <div className="absolute top-4 right-4 rounded-lg">
         <EllipsisMenu setOpenSetting={setOpenSetting} setOpenAbout={setOpenAbout} />
+        
       </div>
       {sidebarOpen && (
         <div
@@ -113,6 +179,7 @@ function Home() {
           onClick={toggleSidebar}
         ></div>
       )}
+     
     </div>
   );
 }

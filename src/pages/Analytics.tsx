@@ -78,7 +78,7 @@ const analytics = () => {
       <span className="mb-1 font-bold ml-2 decoration-purple-500 animate-text text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-7xl">
         Scores
       </span>
-      <div className='border-2 border-slate-400 border-dashed w-full '></div>
+
       <div className="w-1/3 flex flex-row mx-auto">
         <Radar data={radar_data} />
       </div>
@@ -94,7 +94,10 @@ const analytics = () => {
           </div>
         </div>
       </div>
-
+      
+      <div>
+        
+      </div>
       <Disclosure>
         <Disclosure.Button className="py-2 bg-white rounded-xl w-1/2 text-2xl font-semibold mt-5 text-black hover:bg-slate-200 focus:outline-none focus-visible:ring ">
           Grammar
